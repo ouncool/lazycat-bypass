@@ -1,0 +1,27 @@
+#!name=lazycat-bypass
+#!desc=适用于懒猫微服客户端模式(Proxy)
+#!author=ouncool
+#!homepage=https://github.com/ouncool/lazycat-bypass
+
+[General]
+# > IPv6 支持（需要开启）
+ipv6 = true
+# > IPv6 VIF（需要开启）
+ipv6-vif = auto
+always-real-ip = %APPEND% *heiyu.space, *.lazycat.cloud
+skip-proxy = %APPEND% 6.6.6.6/32, 2000::6666/128, fc03:1136:3800::/40, *heiyu.space, *.lazycat.cloud
+tun-excluded-routes = %APPEND% 6.6.6.6/32, 2000::6666/128, fc03:1136:3800::/40
+
+[Rule]
+# PROCESS-NAME,/Applications/懒猫微服.app/Contents/Resources/core/lzc-core.darwin,DIRECT
+# PROCESS-NAME,/Applications/懒猫微服.app/Contents/MacOS/懒猫微服,DIRECT
+IP-CIDR6,fc03:1136:3800::/40,DIRECT,no-resolve
+IP-CIDR,119.91.142.202/32,DIRECT,no-resolve
+IP-CIDR,124.222.37.249/32,DIRECT,no-resolve
+IP-CIDR,224.0.0.251/32,DIRECT,no-resolve
+DOMAIN-SUFFIX,lazycatmicroserver.com,DIRECT
+DOMAIN-SUFFIX,linakesi.com,DIRECT
+DOMAIN-SUFFIX,lazycat.cloud,DIRECT
+
+[Host]
+*.heiyu.space = server:fc03:1136:3800::1  // 指定 DNS 服务
